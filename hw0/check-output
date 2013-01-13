@@ -37,6 +37,15 @@ try:
     if leaderboard is None:
       sys.stderr.write("Bad value for leaderboard\n")
       raise Exception()
+    if type(leaderboard) != type(''):
+      sys.stderr.write("Bad value for leaderboard!\n")
+      raise Exception()
+    if len(leaderboard) > 20 or len(leaderboard) == 0:
+      sys.stderr.write("Invalid length for leadboard\n")
+      raise Exception()
+    if leaderboard == 'ProfDyer':
+      sys.stderr.write("You are not ProfDyer!\n")
+      raise Exception()
     sys.stdout.write("*******************************************************\n")
     sys.stdout.write("       NAME: %s %s\n" % (first, last))
     sys.stdout.write("      EMAIL: %s\n" % email)
