@@ -20,10 +20,15 @@ else
   echo Attempting to install from http://www.cs.cmu.edu/~alavie/METEOR/download/meteor-1.4.tgz 1>&2
   WGET=`which wget`
   if [ $? -gt 0 ]; then
-    echo Can\'t find wget: please download METEOR tar file and unpack it in ./hw4 1>&2
-    exit 1
+    CURL=`which curl`
+    if [ $? -gt 0 ]; then
+      echo Can\'t find wget or curl: please download METEOR tar file and unpack it in ./hw4 1>&2
+      exit 1
+    fi
+    $CURL http://www.cs.cmu.edu/~alavie/METEOR/download/meteor-1.4.tgz > $DIR/meteor-1.4.tgz
+  else
+    $WGET http://www.cs.cmu.edu/~alavie/METEOR/download/meteor-1.4.tgz --directory-prefix=$DIR
   fi
-  $WGET http://www.cs.cmu.edu/~alavie/METEOR/download/meteor-1.4.tgz --directory-prefix=$DIR
   if [ $? -gt 0 ]; then
     echo Please download METEOR tar file and unpack it in ./hw4 1>&2
     exit 1
